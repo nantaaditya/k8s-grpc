@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: grpc-client
+server:
+  port: 8081
+
+grpc:
+  client:
+    greetingService:
+      address: ${GREETING_SERVICE_HOST:static://localhost:9090}
+      enableKeepAlive: true
+      negotiation-type: plaintext
+      default-load-balancing-policy: "round_robin"
