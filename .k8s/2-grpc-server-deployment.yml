@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-server
+  namespace: grpc
+  labels:
+    name: API
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: grpc-server
+  template:
+    metadata:
+      labels:
+        app: grpc-server
+    spec:
+      containers:
+        - name: grpc-server
+          image: nantaaditya/grpc-server:0.0.1
+          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 250m
+            limits:
+              memory: 512Mi
+              cpu: 512m
+          ports:
+            - containerPort: 8080
+            - containerPort: 9090

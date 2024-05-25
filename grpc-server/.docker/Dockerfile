@@ -1,0 +1,22 @@
+FROM eclipse-temurin:17.0.8.1_1-jre-jammy
+
+MAINTAINER nantaaditya
+
+LABEL CREATOR=nantaaditya
+LABEL PROJECT_NAME=grpc-server
+LABEL JDK_VERSION=17
+LABEL JDK_DISTRIBUTION=eclipse-temurin
+LABEL JDK_BUILD_VERSION=17.0.8.1_1-jre-jammy
+LABEL SPRING_VERSION=3.2.6
+
+ENV TZ=Asia/Jakarta
+ENV JAVA_OPTS='-Xms256m -Xmx512m'
+
+RUN mkdir app
+RUN mkdir app/logs
+
+ADD target/*.jar app/app.jar
+
+WORKDIR /app
+
+ENTRYPOINT exec java -server -XX:+UnlockExperimentalVMOptions $JAVA_OPTS -jar app.jar
